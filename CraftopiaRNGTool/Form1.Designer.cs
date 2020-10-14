@@ -331,10 +331,10 @@
             this.radioButton0.AutoSize = true;
             this.radioButton0.Location = new System.Drawing.Point(81, 36);
             this.radioButton0.Name = "radioButton0";
-            this.radioButton0.Size = new System.Drawing.Size(179, 24);
+            this.radioButton0.Size = new System.Drawing.Size(66, 24);
             this.radioButton0.TabIndex = 23;
             this.radioButton0.TabStop = true;
-            this.radioButton0.Text = "全て(ダンジョン除く)";
+            this.radioButton0.Text = "全て";
             this.radioButton0.UseVisualStyleBackColor = true;
             // 
             // numericUpDown1
