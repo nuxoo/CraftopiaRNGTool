@@ -67,6 +67,7 @@ namespace CraftopiaRNGTool
             form1_ListBox.Items.Clear();
             if (textBox1.Text == "") return;
 
+            textBox1.Text = textBox1.Text.Replace("\r", "");
             string[] strs = textBox1.Text.Split('\n');
             object[] objs = new object[strs.Length];
             for (int i = 0; i < strs.Length; i++)
