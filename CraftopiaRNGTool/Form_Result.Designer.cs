@@ -43,14 +43,14 @@
             this.dataGridView1.ReadOnly = true;
             this.dataGridView1.RowHeadersVisible = false;
             this.dataGridView1.RowTemplate.Height = 24;
-            this.dataGridView1.Size = new System.Drawing.Size(1646, 353);
+            this.dataGridView1.Size = new System.Drawing.Size(1646, 339);
             this.dataGridView1.TabIndex = 0;
             // 
             // Form_Result
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1646, 353);
+            this.ClientSize = new System.Drawing.Size(1646, 339);
             this.Controls.Add(this.dataGridView1);
             this.Name = "Form_Result";
             this.Text = "検索結果";

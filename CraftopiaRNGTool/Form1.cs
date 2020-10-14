@@ -8,17 +8,24 @@ namespace CraftopiaRNGTool
 {
     public partial class Form1 : Form
     {
-        private static bool isError = false;
-        private static string iniName = TreasureCalc.dirName + "/" + "ini.ini";
-        private static string charListName = TreasureCalc.dirName + "/" + "list_char_seed.txt";
-        private static string mapIdName = TreasureCalc.dirName + "/" + "list_map_id.txt";
-        public static string favoName = TreasureCalc.dirName + "/" + "list_favorite.txt";
-        private static string treDataName = @"D:\SteamLibrary\クラフトピア\test\treasure\data_08.txt";
-        public static List<string> nonFileNames = new List<string>();
+        public static string dirName;
+        public static string dataDirName;
+        private  static string dataFolderName = "data";
+        private static string treListFolderName = "data_treasure";
+        private static string iniName = "CraftopiaRNGTool.ini";
+
+        public static string favoListName = "CraftopiaRNGTool_favorite.ini";
+        public static string charListName = "list_char_seed.txt";
+        private static string mapIdListName = "list_map_id.txt";
+        private static string searchListName = "CraftopiaRNGTool_search.ini";
+
+        private int[][] mapIds;
         public static string[] favoList;
         public static string[] charList;
-        private int[][] mapIds;
-        private TreasureBoxData[] treBoxList;
+        private TreasureBoxData[][] treBoxList;
+
+        public static List<string> nonFileNames = new List<string>();
+        private static bool isError = false;
         private bool changeFlag = false;
         private RadioButton[] radioButtons1;
         private RadioButton[] radioButtons2;
@@ -30,11 +37,13 @@ namespace CraftopiaRNGTool
                 this.FormClosed += Form1_FormClosed;
                 this.FormClosing += Form1_FormClosing;
                 InitializeComponent();
+                dirName = Application.StartupPath + "\\";
+                dataDirName = dirName + dataFolderName + "\\";
                 TreasureCalc.SetMaxData();
                 TreasureCalc.SetDatas();
                 SetObjects();
                 SetMapIds();
-                SetTreBoxList(); //test
+                SetTreBoxList();
                 ShowNonFile();
             }
             catch (Exception ex) { ErrorEvent("初期化に失敗しました", ex); }
@@ -132,7 +141,7 @@ namespace CraftopiaRNGTool
             {
                 Form_FavoList form = new Form_FavoList();
                 form.ShowDialog();
-                SetFavoList();
+                UI_SetFavoList();
             }
             catch (Exception ex) { ErrorEvent("エラーが発生しました", ex); }
         }
@@ -166,11 +175,11 @@ namespace CraftopiaRNGTool
 
         private void MapIdNum1_ValueChanged(object sender, EventArgs e)
         {
-            SetMapId();
+            UI_SetMapId();
         }
         private void MapIdNum2_ValueChanged(object sender, EventArgs e)
         {
-            SetMapId();
+            UI_SetMapId();
         }
         private void MapIdNum3_ValueChanged(object sender, EventArgs e)
         {
@@ -186,7 +195,7 @@ namespace CraftopiaRNGTool
                 changeFlag = false;
             }
         }
-        
+
         public static void ButtonEvent_Up(ListBox box)
         {
             int index = box.SelectedIndex;
@@ -222,7 +231,7 @@ namespace CraftopiaRNGTool
             }
         }
         
-        private void SetMapId()
+        private void UI_SetMapId()
         {
             int x = (int)mapIdNum1.Value - 1;
             int y = TreasureCalc.max_MapCell - (int)mapIdNum2.Value;
@@ -235,8 +244,7 @@ namespace CraftopiaRNGTool
                 changeFlag = false;
             }
         }
-
-        private void SetFavoList()
+        private void UI_SetFavoList()
         {
             int count = favoList.Length;
             if (favoList[0] == "" && favoList.Length == 1) count = 0;
@@ -261,26 +269,12 @@ namespace CraftopiaRNGTool
             }
         }
 
-        private string GetSearchText()
+        private void SetcomboBoxSelected(ComboBox combo, string str)
         {
-            string str = "";
-            for (int i = 0; i < listBox1.Items.Count; i++)
-            {
-                if (i != 0) str += "|";
-                str += listBox1.Items[i];
-            }
-
-            return str;
-        }
-        private void SetSearchText(string str)
-        {
-            string[] strs = str.Split('|');
-            object[] objs = new object[strs.Length];
-            for (int i = 0; i < strs.Length; i++)
-            {
-                objs[i] = strs[i];
-            }
-            listBox1.Items.AddRange(objs);
+            int index = TreasureCalc.IntParse(str);
+            int count = combo.Items.Count - 1;
+            if (index > count) index = count;
+            combo.SelectedIndex = index;
         }
 
         public static void ErrorEvent(string mes, Exception ex)
@@ -334,7 +328,6 @@ namespace CraftopiaRNGTool
         {
             object[] strs = new object[]
             {
-                "datas",
                 checkBox1.Checked,
                 checkBox2.Checked,
                 checkBox3.Checked,
@@ -346,36 +339,63 @@ namespace CraftopiaRNGTool
                 comboBox2.SelectedIndex,
                 comboBox3.SelectedIndex,
                 numericUpDown1.Value,
-                GetSearchText()
+                numericUpDown2.Value
             };
 
-            File.WriteAllText(iniName, string.Join("\n", strs));
+            File.WriteAllText(dirName + iniName, string.Join("\n", strs));
+            WriteSearchText(dirName + searchListName);
         }
         private void ReadIni()
         {
-            if (File.Exists(iniName))
+            string fileName = dirName + iniName;
+            if (File.Exists(fileName))
             {
-                string[] strs = File.ReadAllLines(iniName, Encoding.UTF8);
+                string[] strs = File.ReadAllLines(fileName, Encoding.UTF8);
                 if (strs.Length < 12) return;
 
-                checkBox1.Checked = strs[1] == "True";
-                checkBox2.Checked = strs[2] == "True";
-                checkBox3.Checked = strs[3] == "True";
-                worldSeedText.Text = strs[4];
-                mapIdNum3.Text = strs[5];
-                SetRadioButtonChecked(radioButtons1, strs[6]);
-                SetRadioButtonChecked(radioButtons2, strs[7]);
-                comboBox1.SelectedIndex = TreasureCalc.IntParse(strs[8]);
-                comboBox2.SelectedIndex = TreasureCalc.IntParse(strs[9]);
-                comboBox3.SelectedIndex = TreasureCalc.IntParse(strs[10]);
-                numericUpDown1.Text = strs[11];
-                if (strs.Length > 12) SetSearchText(strs[12]);
+                checkBox1.Checked = strs[0] == "True";
+                checkBox2.Checked = strs[1] == "True";
+                checkBox3.Checked = strs[2] == "True";
+                worldSeedText.Text = strs[3];
+                mapIdNum3.Text = strs[4];
+                SetRadioButtonChecked(radioButtons1, strs[5]);
+                SetRadioButtonChecked(radioButtons2, strs[6]);
+                SetcomboBoxSelected(comboBox1, strs[7]);
+                SetcomboBoxSelected(comboBox2, strs[8]);
+                SetcomboBoxSelected(comboBox3, strs[9]);
+                numericUpDown1.Text = strs[10];
+                numericUpDown2.Text = strs[11];
             }
+
+            ReadSearchText(dirName + searchListName);
         }
         
+        private void WriteSearchText(string fileName)
+        {
+            List<string> strs = new List<string>();
+            for (int i = 0; i < listBox1.Items.Count; i++)
+            {
+                strs.Add(listBox1.Items[i].ToString());
+            }
+
+            File.WriteAllLines(fileName, strs);
+        }
+        private void ReadSearchText(string fileName)
+        {
+            if (!File.Exists(fileName)) return;
+
+            string[] strs = TreasureCalc.TryReadFile(fileName);
+            object[] objs = new object[strs.Length];
+            for (int i = 0; i < strs.Length; i++)
+            {
+                objs[i] = strs[i];
+            }
+            listBox1.Items.AddRange(objs);
+        }
+
         private void SetMapIds()
         {
-            string[] texts = TreasureCalc.TryReadFile(mapIdName);
+            string[] texts = TreasureCalc.TryReadFile(dataDirName + mapIdListName);
             if (texts == null) return;
             int[][] vs = new int[texts.Length][];
 
@@ -392,7 +412,7 @@ namespace CraftopiaRNGTool
 
             mapIds = vs;
         }
-
+        
         private void SetObjects()
         {
             mapIdNum1.Maximum = TreasureCalc.max_MapCell;
@@ -406,10 +426,10 @@ namespace CraftopiaRNGTool
             comboBox1.SelectedIndex = 0;
             comboBox2.SelectedIndex = 0;
 
-            favoList = TreasureCalc.TryReadFile(favoName);
-            SetFavoList();
-            charList = TreasureCalc.TryReadFile(charListName);
-
+            favoList = TreasureCalc.TryReadFile(dirName + favoListName);
+            UI_SetFavoList();
+            charList = TreasureCalc.TryReadFile(dataDirName + charListName);
+            
             radioButtons1 = new RadioButton[] {
                 radioButton0, radioButton1, radioButton2, radioButton3
             };
@@ -431,6 +451,8 @@ namespace CraftopiaRNGTool
             int[][] searchValue = GetSearchValue(radioValue2);
             int iValue = 0, iLength;
             int[] jValue = mapIds[islandLevel];
+            int maxCount = (int)numericUpDown2.Value;
+            int count = 0;
 
             if (checkBox1.Checked && checkBox2.Checked)
             {
@@ -456,7 +478,7 @@ namespace CraftopiaRNGTool
                     jValue = new int[] { (int)mapIdNum3.Value };
                 }
             }
-
+            
             for (int j = 0; j < jValue.Length; j++)
             {
                 for (int i = iValue; i < iLength; i++)
@@ -480,6 +502,13 @@ namespace CraftopiaRNGTool
                             }
                             TreasureData treData = new TreasureData(islandLevel, seed, wSeed, iId, treType, treBoxs[k], items, radioValue1);
                             treDatas.Add(treData);
+                            count++;
+                            if (count >= maxCount)
+                            {
+                                i = iLength;
+                                j = jValue.Length;
+                                break;
+                            }
                         }
                     }
                 }
@@ -650,6 +679,88 @@ namespace CraftopiaRNGTool
                 }
             }
         }
+
+        private void SetTreBoxList()
+        {
+            List<TreasureBoxData[]> datas = new List<TreasureBoxData[]>();
+            string dir = dirName + treListFolderName;
+            if (!Directory.Exists(dir))
+            {
+                nonFileNames.Add(dir);
+                return;
+            }
+            string[] files = Directory.GetFiles(dir, "*.txt", SearchOption.AllDirectories);
+            if (files == null) return;
+            string[] fileNames = new string[files.Length];
+
+            for (int i = 0; i < files.Length; i++)
+            {
+                datas.Add(SetTreBoxList_Sub(files[i]));
+                fileNames[i] = Path.GetFileNameWithoutExtension(files[i]);
+            }
+
+            treBoxList = datas.ToArray();
+            comboBox3.Items.AddRange(fileNames);
+            comboBox3.SelectedIndex = 0;
+        }
+        private TreasureBoxData[] SetTreBoxList_Sub(string fileName)
+        {
+
+            string[] strs = TreasureCalc.TryReadFile(fileName);
+            if (strs == null) return null;
+            TreasureBoxData[] treBoxs = new TreasureBoxData[strs.Length];
+            string name = Path.GetFileNameWithoutExtension(fileName);
+
+            for (int i = 0; i < strs.Length; i++)
+            {
+                if (strs[i] == "" || strs[i] == null)
+                {
+                    treBoxs[i] = new TreasureBoxData();
+                    continue;
+                }
+                string[] s = strs[i].Split(',');
+                if (s.Length < 7)
+                {
+                    treBoxs[i] = new TreasureBoxData();
+                    continue;
+                }
+
+                treBoxs[i] = new TreasureBoxData(s, name + " " + s[6]);
+            }
+
+            return treBoxs;
+        }
+        
+        private TreasureBoxData[] GetTreList(int value, int rarity)
+        {
+            TreasureBoxData[] treBoxs;
+            if (value == 0)
+            {
+                treBoxs = GetAllTreBox(rarity);
+            }
+            else if (value == 1)
+            {
+                treBoxs = GetFavoListTreBoxs();
+            }
+            else if (value == 2)
+            {
+                int index = comboBox3.SelectedIndex;
+                if (comboBox3.SelectedIndex >= 0)
+                {
+                    treBoxs = treBoxList[index];
+                }
+                else
+                {
+                    treBoxs = new TreasureBoxData[] { new TreasureBoxData(0) };
+                }
+            }
+            else
+            {
+                treBoxs = new TreasureBoxData[] { new TreasureBoxData((int)numericUpDown1.Value) };
+            }
+
+            return treBoxs;
+        }
         
         private TreasureBoxData[] GetFavoListTreBoxs()
         {
@@ -678,62 +789,16 @@ namespace CraftopiaRNGTool
             return treBoxs;
         }
 
-        private TreasureBoxData[] GetTreList(int value, int rarity)
-        {
-            TreasureBoxData[] treBoxs;
-            if (value == 0)
-            {
-                treBoxs = GetAllTreBox(rarity);
-            }
-            else if (value == 1)
-            {
-                treBoxs = GetFavoListTreBoxs();
-            }
-            else if (value == 2)
-            {
-                treBoxs = null;
-            }
-            else
-            {
-                treBoxs = new TreasureBoxData[] { new TreasureBoxData((int)numericUpDown1.Value) };
-            }
-
-            return treBoxs;
-        }
-
-        private void SetTreBoxList()
-        {
-            string[] strs = TreasureCalc.TryReadFile(treDataName);
-            if (strs == null) return;
-            TreasureBoxData[] treBoxs = new TreasureBoxData[strs.Length];
-            string name = Path.GetFileNameWithoutExtension(treDataName);
-
-            for (int i = 0; i < strs.Length; i++)
-            {
-                if (strs[i] == "" || strs[i] == null)
-                {
-                    treBoxs[i] = new TreasureBoxData();
-                    continue;
-                }
-                string[] s = strs[i].Split(',');
-                if (s.Length < 7)
-                {
-                    treBoxs[i] = new TreasureBoxData();
-                    continue;
-                }
-
-                treBoxs[i] = new TreasureBoxData(s, name + " " + s[6]);
-            }
-
-            treBoxList = treBoxs;
-        }
-
         private TreasureBoxData[] GetAllTreBox(int rarity)
         {
             List<TreasureBoxData> list = new List<TreasureBoxData>();
+
             for (int i = 0; i < treBoxList.Length; i++)
             {
-                if (rarity == treBoxList[i].Rarity) list.Add(treBoxList[i]);
+                for (int j = 0; j < treBoxList[i].Length; j++)
+                {
+                    if (rarity == treBoxList[i][j].Rarity) list.Add(treBoxList[i][j]);
+                }
             }
 
             return list.ToArray();

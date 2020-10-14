@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Windows.Forms;
 using System.Text;
 using System.IO;
 
@@ -7,13 +6,13 @@ namespace CraftopiaRNGTool
 {
     public static class TreasureCalc
     {
-        public static string dirName = @"D:\SteamLibrary\クラフトピア\test\datas";
-        private static string otherName = dirName + "/other_data.txt";
-        private static string rarityProbName = dirName + "/rarity_prob.txt";
-        private static string rarityArrayName = dirName + "/rarity_array_";
-        private static string rarityChashName = dirName + "/rarity_cash_";
-        private static string enchantRarityName = dirName + "/enchant_rarity_";
-        private static string ItemRarityName = dirName + "/item_rarity_";
+        private static readonly string otherName = "other_data.txt";
+        private static readonly string rarityProbName = "rarity_prob.txt";
+        private static readonly string rarityArrayName = "rarity_array_";
+        private static readonly string rarityChashName = "rarity_cash_";
+        private static readonly string enchantRarityName = "enchant_rarity_";
+        private static readonly string itemRarityName = "item_rarity_";
+
         public static ItemData[][] data_Item;
         public static EnchantData[][] data_Enchant;
         private static float[] probs_Item;
@@ -22,6 +21,7 @@ namespace CraftopiaRNGTool
         private static int[][][] rarityArray_Enchant;
         private static int[][] rarityCash_Item;
         private static int[][] rarityCash_Enchant;
+
         private static int max_Rarity_Item = 14;
         private static int max_Rarity_Enchant = 4;
         private static int max_TreasureType = 3;
@@ -30,7 +30,7 @@ namespace CraftopiaRNGTool
 
         public static void SetMaxData()
         {
-            string fileName = otherName;
+            string fileName = Form1.dataDirName + otherName;
             string[] strs = TryReadFile(fileName);
             string[] texts = strs[0].Split(',');
             if (texts.Length < 5) return;
@@ -55,8 +55,8 @@ namespace CraftopiaRNGTool
 
         private static void SetRarityProbs()
         {
+            string fileName = Form1.dataDirName + rarityProbName;
             float[][] probs = new float[2][];
-            string fileName = rarityProbName;
             string[] strs = TryReadFile(fileName);
             if (strs.Length < 2) return;
 
@@ -75,7 +75,7 @@ namespace CraftopiaRNGTool
 
         private static int[][][] SetRarityArray_Sub(string name)
         {
-            string fileName = rarityArrayName + name + ".txt";
+            string fileName = Form1.dataDirName + rarityArrayName + name + ".txt";
             string[] strs = TryReadFile(fileName);
             int num = strs.Length / max_TreasureType;
             int[][][] rarityArray = new int[num][][];
@@ -106,7 +106,7 @@ namespace CraftopiaRNGTool
         }
         private static int[][] SetRarityCash_Sub(string name)
         {
-            string fileName = rarityChashName + name + ".txt";
+            string fileName = Form1.dataDirName + rarityChashName + name + ".txt";
             string[] strs = TryReadFile(fileName);
             int[][] rarityCash = new int[strs.Length][];
 
@@ -129,7 +129,8 @@ namespace CraftopiaRNGTool
             for (int i = 0; i < max_Rarity_Item; i++)
             {
                 string name = $"{(i + 1):00}" + ".txt";
-                string[] strs = TryReadFile(ItemRarityName + name);
+                string fileName = Form1.dataDirName + itemRarityName + name;
+                string[] strs = TryReadFile(fileName);
                 data_Item[i] = new ItemData[strs.Length];
                 for (int j = 0; j < strs.Length; j++)
                 {
@@ -143,7 +144,8 @@ namespace CraftopiaRNGTool
             for (int i = 0; i < max_Rarity_Enchant; i++)
             {
                 string name = $"{(i + 1):00}" + ".txt";
-                string[] strs = TryReadFile(enchantRarityName + name);
+                string fileName = Form1.dataDirName + enchantRarityName + name;
+                string[] strs = TryReadFile(fileName);
                 data_Enchant[i] = new EnchantData[strs.Length];
                 for (int j = 0; j < strs.Length; j++)
                 {

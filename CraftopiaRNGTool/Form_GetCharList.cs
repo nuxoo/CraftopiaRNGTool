@@ -3,6 +3,7 @@ using System.Windows.Forms;
 using System.Text;
 using System.IO;
 
+//テスト用
 namespace CraftopiaRNGTool
 {
     public partial class Form_GetCharList : Form
@@ -60,7 +61,7 @@ namespace CraftopiaRNGTool
                         return;
                     }
 
-                    string fileName = TreasureCalc.dirName + "/" + "List_Char_Seed.txt";
+                    string fileName = Form1.dirName + Form1.charListName;
                     File.WriteAllLines(fileName, strs);
                     Close();
                     MessageBox.Show("完了！");

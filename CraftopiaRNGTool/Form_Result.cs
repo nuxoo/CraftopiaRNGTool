@@ -1,5 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using System.Drawing;
 using System.Windows.Forms;
 
 namespace CraftopiaRNGTool
@@ -66,6 +66,7 @@ namespace CraftopiaRNGTool
                     HeaderText = "アイテム" + i,
                     Width = itemWidth
                 };
+                textColumn.DefaultCellStyle.BackColor = Color.LavenderBlush;
                 columns[count] = textColumn;
                 count++;
                 viewWidth += itemWidth;

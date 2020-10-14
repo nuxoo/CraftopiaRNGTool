@@ -74,6 +74,8 @@
             this.label1 = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
             this.button10 = new System.Windows.Forms.Button();
+            this.label6 = new System.Windows.Forms.Label();
+            this.numericUpDown2 = new System.Windows.Forms.NumericUpDown();
             ((System.ComponentModel.ISupportInitialize)(this.worldSeedNum)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.mapIdNum1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.mapIdNum2)).BeginInit();
@@ -84,6 +86,7 @@
             this.groupBox3.SuspendLayout();
             this.groupBox4.SuspendLayout();
             this.groupBox5.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).BeginInit();
             this.SuspendLayout();
             // 
             // label12
@@ -190,7 +193,9 @@
             // 
             // worldSeedText
             // 
+            this.worldSeedText.BackColor = System.Drawing.SystemColors.Window;
             this.worldSeedText.Location = new System.Drawing.Point(121, 35);
+            this.worldSeedText.MaxLength = 1;
             this.worldSeedText.Name = "worldSeedText";
             this.worldSeedText.Size = new System.Drawing.Size(60, 27);
             this.worldSeedText.TabIndex = 1;
@@ -326,10 +331,10 @@
             this.radioButton0.AutoSize = true;
             this.radioButton0.Location = new System.Drawing.Point(81, 36);
             this.radioButton0.Name = "radioButton0";
-            this.radioButton0.Size = new System.Drawing.Size(66, 24);
+            this.radioButton0.Size = new System.Drawing.Size(179, 24);
             this.radioButton0.TabIndex = 23;
             this.radioButton0.TabStop = true;
-            this.radioButton0.Text = "全て";
+            this.radioButton0.Text = "全て(ダンジョン除く)";
             this.radioButton0.UseVisualStyleBackColor = true;
             // 
             // numericUpDown1
@@ -634,7 +639,7 @@
             // 
             // button10
             // 
-            this.button10.Location = new System.Drawing.Point(559, 465);
+            this.button10.Location = new System.Drawing.Point(33, 470);
             this.button10.Name = "button10";
             this.button10.Size = new System.Drawing.Size(142, 30);
             this.button10.TabIndex = 12;
@@ -643,11 +648,47 @@
             this.button10.Visible = false;
             this.button10.Click += new System.EventHandler(this.Button10_Click);
             // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(523, 470);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(99, 20);
+            this.label6.TabIndex = 33;
+            this.label6.Text = "最大件数；";
+            // 
+            // numericUpDown2
+            // 
+            this.numericUpDown2.BackColor = System.Drawing.SystemColors.Window;
+            this.numericUpDown2.Font = new System.Drawing.Font("MS UI Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.numericUpDown2.Location = new System.Drawing.Point(629, 468);
+            this.numericUpDown2.Margin = new System.Windows.Forms.Padding(4);
+            this.numericUpDown2.Maximum = new decimal(new int[] {
+            99999,
+            0,
+            0,
+            0});
+            this.numericUpDown2.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.numericUpDown2.Name = "numericUpDown2";
+            this.numericUpDown2.Size = new System.Drawing.Size(90, 27);
+            this.numericUpDown2.TabIndex = 37;
+            this.numericUpDown2.Value = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            0});
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(745, 513);
+            this.Controls.Add(this.numericUpDown2);
+            this.Controls.Add(this.label6);
             this.Controls.Add(this.button10);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.label1);
@@ -680,6 +721,7 @@
             this.groupBox4.ResumeLayout(false);
             this.groupBox5.ResumeLayout(false);
             this.groupBox5.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -733,6 +775,8 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.CheckBox checkBox3;
         private System.Windows.Forms.Button button10;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.NumericUpDown numericUpDown2;
     }
 }
 

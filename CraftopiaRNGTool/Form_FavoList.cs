@@ -91,7 +91,7 @@ namespace CraftopiaRNGTool
                 }
 
                 Form1.favoList = strs;
-                File.WriteAllLines(Form1.favoName, strs);
+                File.WriteAllLines(Form1.dirName + Form1.favoListName, strs);
             }
         }
         private void SetFavoList()
@@ -99,7 +99,10 @@ namespace CraftopiaRNGTool
             List<ListViewItem> list = new List<ListViewItem>();
             foreach (string str in Form1.favoList)
             {
-                list.Add(new ListViewItem(str.Split(',')));
+                if (str != "")
+                {
+                    list.Add(new ListViewItem(str.Split(',')));
+                }
             }
 
             listView1.Items.AddRange(list.ToArray());
