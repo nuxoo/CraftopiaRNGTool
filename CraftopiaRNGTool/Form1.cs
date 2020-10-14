@@ -191,7 +191,7 @@ namespace CraftopiaRNGTool
             {
                 changeFlag = true;
                 mapIdNum1.Value = x;
-                mapIdNum2.Value = y;
+                mapIdNum2.Value = TreasureCalc.max_MapCell - y + 1;
                 changeFlag = false;
             }
         }
@@ -303,13 +303,19 @@ namespace CraftopiaRNGTool
         public static object[] GetItemList(bool mode)
         {
             List<ItemData> list = new List<ItemData>();
-            foreach (ItemData[] items in TreasureCalc.data_Item)
+            int index = Program.form1.comboBox1.SelectedIndex;
+            int index2 = Program.form1.comboBox2.SelectedIndex;
+            int[] vs = TreasureCalc.rarityArray_Item[index][index2];
+            for (int i = 0; i < TreasureCalc.data_Item.Length; i++)
             {
-                foreach (ItemData item in items)
+                if (vs[i] > 0)
                 {
-                    if ((item.Type == "Equipment") == mode)
+                    foreach (ItemData item in TreasureCalc.data_Item[i])
                     {
-                        list.Add(item);
+                        if (!mode || item.Type == "Equipment" || item.Type == "Material" || item.Type == "Consumption")
+                        {
+                            list.Add(item);
+                        }
                     }
                 }
             }
@@ -526,7 +532,7 @@ namespace CraftopiaRNGTool
 
             for (int i = 0; i < count; i++)
             {
-                string str = "" + listBox1.Items[i];
+                string str = listBox1.Items[i].ToString();
                 if (str == "") continue;
                 string[] strs = str.Split(',');
                 int[] v = new int[strs.Length];
@@ -606,7 +612,7 @@ namespace CraftopiaRNGTool
 
             if (values[1] > values.Length - 2)
             {
-                if (values.Length - 2 == count) return true;
+                if (values.Length - 2 <= count) return true;
                 return false;
             }
             if (values[1] <= count) return true;

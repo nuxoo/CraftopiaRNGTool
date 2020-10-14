@@ -59,15 +59,19 @@
             Item2 = SetItem(items, 1);
             Item3 = SetItem(items, 2);
             Item4 = SetItem(items, 3);
+
             Enchant1_1 = SetEnchant(items, 0, 0);
             Enchant1_2 = SetEnchant(items, 0, 1);
             Enchant1_3 = SetEnchant(items, 0, 2);
+
             Enchant2_1 = SetEnchant(items, 1, 0);
             Enchant2_2 = SetEnchant(items, 1, 1);
             Enchant2_3 = SetEnchant(items, 1, 2);
+
             Enchant3_1 = SetEnchant(items, 2, 0);
             Enchant3_2 = SetEnchant(items, 2, 1);
             Enchant3_3 = SetEnchant(items, 2, 2);
+
             Enchant4_1 = SetEnchant(items, 3, 0);
             Enchant4_2 = SetEnchant(items, 3, 1);
             Enchant4_3 = SetEnchant(items, 3, 2);

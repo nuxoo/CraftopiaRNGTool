@@ -30,5 +30,16 @@ namespace CraftopiaRNGTool
             Prob = TreasureCalc.IntParse(strs[5]);
             Enchant = null;
         }
+
+        public ItemData(ItemData item)
+        {
+            Id = item.Id;
+            Name = item.Name;
+            Type = item.Type;
+            RarityType = item.RarityType;
+            Rarity = item.Rarity;
+            Prob = item.Prob;
+            Enchant = null;
+        }
     }
 }

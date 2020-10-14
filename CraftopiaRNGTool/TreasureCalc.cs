@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Text;
 using System.IO;
+using System.Windows.Forms;
 
 namespace CraftopiaRNGTool
 {
@@ -17,7 +18,7 @@ namespace CraftopiaRNGTool
         public static EnchantData[][] data_Enchant;
         private static float[] probs_Item;
         private static float[] probs_Enchant;
-        private static int[][][] rarityArray_Item;
+        public static int[][][] rarityArray_Item;
         private static int[][][] rarityArray_Enchant;
         private static int[][] rarityCash_Item;
         private static int[][] rarityCash_Enchant;
@@ -197,7 +198,7 @@ namespace CraftopiaRNGTool
                 num += data_Item[itemRarity][i].Prob;
                 if (num >= rand)
                 {
-                    return data_Item[itemRarity][i];
+                    return new ItemData(data_Item[itemRarity][i]);
                 }
             }
             return new ItemData();

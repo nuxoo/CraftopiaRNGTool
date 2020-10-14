@@ -16,7 +16,7 @@ namespace CraftopiaRNGTool
             FormClosed += Form_FormClosed;
             form1_ListBox = box;
             isAddMode = isAdd;
-            if (itemList == null) itemList = Form1.GetItemList(true);
+            itemList = Form1.GetItemList(true);
 
             comboBox1.Items.AddRange(itemList);
             comboBox2.Items.AddRange(GetEnchantList());

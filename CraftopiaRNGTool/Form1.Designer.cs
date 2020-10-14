@@ -576,11 +576,11 @@
             // button5
             // 
             this.button5.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.button5.Location = new System.Drawing.Point(141, 263);
+            this.button5.Location = new System.Drawing.Point(81, 263);
             this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(120, 30);
+            this.button5.Size = new System.Drawing.Size(180, 30);
             this.button5.TabIndex = 31;
-            this.button5.Text = "装備追加";
+            this.button5.Text = "追加（エンチャ指定）";
             this.button5.UseVisualStyleBackColor = false;
             this.button5.Click += new System.EventHandler(this.Add_Equipment_Click);
             // 
@@ -589,9 +589,9 @@
             this.button4.BackColor = System.Drawing.SystemColors.ControlLight;
             this.button4.Location = new System.Drawing.Point(15, 263);
             this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(120, 30);
+            this.button4.Size = new System.Drawing.Size(60, 30);
             this.button4.TabIndex = 30;
-            this.button4.Text = "アイテム追加";
+            this.button4.Text = "追加";
             this.button4.UseVisualStyleBackColor = false;
             this.button4.Click += new System.EventHandler(this.Add_Item_Click);
             // 
