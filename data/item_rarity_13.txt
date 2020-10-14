@@ -1,0 +1,11 @@
+1331,グリーンカレー,Consumption,Epic,3,1
+1347,火鍋,Consumption,Common,0,1
+1349,酢豚,Consumption,Common,0,1
+1383,トムヤムクン,Consumption,Epic,3,1
+1385,ハワイアンステーキ,Consumption,Epic,3,1
+1392,タコス,Consumption,Epic,3,1
+2158,品種改良タネ袋Lv13,Consumption,Common,0,2
+3144,ケペシュIII,Equipment,Common,0,5
+3147,感謝の聖剣III,Equipment,Common,0,5
+3151,ガネーシャの宝剣,Equipment,Common,0,5
+3156,無心流鎖鎌III,Equipment,Common,0,5

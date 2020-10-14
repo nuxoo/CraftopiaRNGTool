@@ -1,0 +1,9 @@
+708,パラジウム,Material,Rare,2,2
+720,パラジウムのインゴット,Material,Uncommon,1,10
+1309,塩キャベツ,Consumption,Common,0,1
+1310,ザワークラウト,Consumption,Common,0,1
+1322,トマトサラダ,Consumption,Common,0,1
+1326,ポトフ,Consumption,Common,0,1
+1356,ホットドッグ,Consumption,Common,0,1
+1388,すき焼き,Consumption,Common,0,1
+2156,品種改良タネ袋Lv11,Consumption,Common,0,2

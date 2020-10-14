@@ -1,0 +1,15 @@
+47,銀の片手剣,Equipment,Uncommon,1,10
+59,銀のつるはし,Equipment,Uncommon,1,10
+71,銀の斧,Equipment,Uncommon,1,10
+95,銀の弓,Equipment,Uncommon,1,10
+119,銀の盾,Equipment,Uncommon,1,10
+692,鳥の羽根,Material,Common,0,100
+701,銀鉱石,Material,Uncommon,1,20
+713,銀のインゴット,Material,Uncommon,1,40
+1318,うどん,Consumption,Uncommon,1,4
+1319,茶碗蒸し,Consumption,Uncommon,1,4
+1329,エビフライ,Consumption,Uncommon,1,4
+1352,サボテンサラダ,Consumption,Common,0,4
+1369,味噌汁,Consumption,Common,0,4
+1822,マムルークソードI,Equipment,Common,0,100
+2149,品種改良タネ袋Lv4,Consumption,Common,0,2

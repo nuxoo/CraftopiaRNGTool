@@ -1,0 +1,12 @@
+1218,ピーチ,Consumption,Legendary,4,20
+1219,ピーチの種,Equipment,Legendary,4,20
+1325,プリン,Consumption,Legendary,4,1
+1350,フルーツカクテル,Consumption,Legendary,4,1
+1368,ピーチタルト,Consumption,Legendary,4,1
+1397,トリュフソースの魚のソテー,Consumption,Legendary,4,1
+1398,トリュフソースのステーキ,Consumption,Legendary,4,1
+1399,トリュフのクリームパスタ,Consumption,Legendary,4,1
+2159,品種改良タネ袋Lv14,Consumption,Common,0,2
+3145,アモンの短剣,Equipment,Common,0,1
+3149,ギンヌンガガプ,Equipment,Common,0,1
+3154,アラビアン・ナイト,Equipment,Common,0,1
