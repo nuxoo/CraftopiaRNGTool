@@ -10,6 +10,7 @@
         public int PosHash { get; set; }
         public int Rarity { get; set; }
         public string Memo { get; set; }
+        public string Spawn { get; set; }
         public string X { get; set; }
         public string Z { get; set; }
         public string Y { get; set; }
@@ -47,6 +48,7 @@
             Items = items;
             SeedChar = Form1.charList.Length > wseed ? Form1.charList[wseed] : "";
             Memo = treBox.Memo;
+            Spawn = treBox.Spawn;
             X = treBox.X;
             Z = treBox.Z;
             Y = treBox.Y;

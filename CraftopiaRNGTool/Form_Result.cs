@@ -21,13 +21,13 @@ namespace CraftopiaRNGTool
         private void SetData(List<TreasureData> treDatas, int mode)
         {
             string[] names = new string[] {
-                "IslandLv", "Seed", "WSeed", "SeedChar", "MapId", "Rarity", "PosHash", "Memo", "X", "Z", "Y"
+                "IslandLv", "Seed", "WSeed", "SeedChar", "MapId", "Rarity", "PosHash", "Memo", "Spawn", "X", "Z", "Y"
             };
             string[] names2 = new string[] {
-                "島Lv", "Seed", "WSeed", "Char", "MapId", "Type", "宝箱座標", "メモ", "x", "z", "y"
+                "島Lv", "Seed", "WSeed", "Char", "MapId", "Type", "宝箱座標", "メモ", "確定", "x", "z", "y"
             };
             int[] widths = new int[] {
-                40, 44, 44, 40, 50, 44, 100, 100, 60, 60, 60
+                40, 44, 44, 40, 50, 44, 100, 106, 48, 60, 60, 60
             };
             int itemWidth = 100;
             int enchantWidth = 64;

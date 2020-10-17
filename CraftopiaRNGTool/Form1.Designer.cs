@@ -76,6 +76,8 @@
             this.button10 = new System.Windows.Forms.Button();
             this.label6 = new System.Windows.Forms.Label();
             this.numericUpDown2 = new System.Windows.Forms.NumericUpDown();
+            this.radioButton7 = new System.Windows.Forms.RadioButton();
+            this.comboBox4 = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.worldSeedNum)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.mapIdNum1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.mapIdNum2)).BeginInit();
@@ -92,7 +94,7 @@
             // label12
             // 
             this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(29, 404);
+            this.label12.Location = new System.Drawing.Point(27, 420);
             this.label12.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(60, 20);
@@ -102,7 +104,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(193, 404);
+            this.label2.Location = new System.Drawing.Point(191, 420);
             this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(102, 20);
@@ -129,7 +131,7 @@
             // 
             this.comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(96, 401);
+            this.comboBox1.Location = new System.Drawing.Point(94, 417);
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(70, 28);
             this.comboBox1.TabIndex = 4;
@@ -142,7 +144,7 @@
             "Common",
             "Epic",
             "Legendary"});
-            this.comboBox2.Location = new System.Drawing.Point(302, 401);
+            this.comboBox2.Location = new System.Drawing.Point(300, 417);
             this.comboBox2.Name = "comboBox2";
             this.comboBox2.Size = new System.Drawing.Size(120, 28);
             this.comboBox2.TabIndex = 6;
@@ -297,7 +299,7 @@
             // 
             this.radioButton1.AutoSize = true;
             this.radioButton1.Checked = true;
-            this.radioButton1.Location = new System.Drawing.Point(81, 76);
+            this.radioButton1.Location = new System.Drawing.Point(66, 69);
             this.radioButton1.Name = "radioButton1";
             this.radioButton1.Size = new System.Drawing.Size(115, 24);
             this.radioButton1.TabIndex = 20;
@@ -308,17 +310,17 @@
             // radioButton2
             // 
             this.radioButton2.AutoSize = true;
-            this.radioButton2.Location = new System.Drawing.Point(81, 116);
+            this.radioButton2.Location = new System.Drawing.Point(66, 107);
             this.radioButton2.Name = "radioButton2";
-            this.radioButton2.Size = new System.Drawing.Size(149, 24);
+            this.radioButton2.Size = new System.Drawing.Size(121, 24);
             this.radioButton2.TabIndex = 21;
-            this.radioButton2.Text = "島タイプで指定";
+            this.radioButton2.Text = "フィールド上";
             this.radioButton2.UseVisualStyleBackColor = true;
             // 
             // radioButton3
             // 
             this.radioButton3.AutoSize = true;
-            this.radioButton3.Location = new System.Drawing.Point(81, 156);
+            this.radioButton3.Location = new System.Drawing.Point(66, 183);
             this.radioButton3.Name = "radioButton3";
             this.radioButton3.Size = new System.Drawing.Size(110, 24);
             this.radioButton3.TabIndex = 22;
@@ -329,7 +331,7 @@
             // radioButton0
             // 
             this.radioButton0.AutoSize = true;
-            this.radioButton0.Location = new System.Drawing.Point(81, 36);
+            this.radioButton0.Location = new System.Drawing.Point(66, 31);
             this.radioButton0.Name = "radioButton0";
             this.radioButton0.Size = new System.Drawing.Size(66, 24);
             this.radioButton0.TabIndex = 23;
@@ -341,7 +343,7 @@
             // 
             this.numericUpDown1.BackColor = System.Drawing.SystemColors.Window;
             this.numericUpDown1.Font = new System.Drawing.Font("MS UI Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.numericUpDown1.Location = new System.Drawing.Point(236, 156);
+            this.numericUpDown1.Location = new System.Drawing.Point(221, 183);
             this.numericUpDown1.Margin = new System.Windows.Forms.Padding(4);
             this.numericUpDown1.Maximum = new decimal(new int[] {
             2147483647,
@@ -361,7 +363,9 @@
             // 
             this.comboBox3.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBox3.FormattingEnabled = true;
-            this.comboBox3.Location = new System.Drawing.Point(275, 115);
+            this.comboBox3.Items.AddRange(new object[] {
+            "All"});
+            this.comboBox3.Location = new System.Drawing.Point(260, 106);
             this.comboBox3.Name = "comboBox3";
             this.comboBox3.Size = new System.Drawing.Size(121, 28);
             this.comboBox3.TabIndex = 25;
@@ -431,6 +435,8 @@
             // 
             // groupBox3
             // 
+            this.groupBox3.Controls.Add(this.comboBox4);
+            this.groupBox3.Controls.Add(this.radioButton7);
             this.groupBox3.Controls.Add(this.checkBox3);
             this.groupBox3.Controls.Add(this.label3);
             this.groupBox3.Controls.Add(this.button9);
@@ -442,7 +448,7 @@
             this.groupBox3.Controls.Add(this.radioButton0);
             this.groupBox3.Location = new System.Drawing.Point(12, 184);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(440, 200);
+            this.groupBox3.Size = new System.Drawing.Size(440, 227);
             this.groupBox3.TabIndex = 20;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "宝箱座標";
@@ -450,7 +456,7 @@
             // checkBox3
             // 
             this.checkBox3.AutoSize = true;
-            this.checkBox3.Location = new System.Drawing.Point(285, 37);
+            this.checkBox3.Location = new System.Drawing.Point(270, 31);
             this.checkBox3.Name = "checkBox3";
             this.checkBox3.Size = new System.Drawing.Size(111, 24);
             this.checkBox3.TabIndex = 36;
@@ -461,7 +467,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(271, 78);
+            this.label3.Location = new System.Drawing.Point(256, 71);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(39, 20);
             this.label3.TabIndex = 33;
@@ -470,7 +476,7 @@
             // button9
             // 
             this.button9.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.button9.Location = new System.Drawing.Point(336, 73);
+            this.button9.Location = new System.Drawing.Point(321, 66);
             this.button9.Name = "button9";
             this.button9.Size = new System.Drawing.Size(60, 30);
             this.button9.TabIndex = 35;
@@ -682,6 +688,28 @@
             0,
             0});
             // 
+            // radioButton7
+            // 
+            this.radioButton7.AutoSize = true;
+            this.radioButton7.Location = new System.Drawing.Point(66, 145);
+            this.radioButton7.Name = "radioButton7";
+            this.radioButton7.Size = new System.Drawing.Size(101, 24);
+            this.radioButton7.TabIndex = 37;
+            this.radioButton7.TabStop = true;
+            this.radioButton7.Text = "ダンジョン";
+            this.radioButton7.UseVisualStyleBackColor = true;
+            // 
+            // comboBox4
+            // 
+            this.comboBox4.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBox4.FormattingEnabled = true;
+            this.comboBox4.Items.AddRange(new object[] {
+            "All"});
+            this.comboBox4.Location = new System.Drawing.Point(183, 144);
+            this.comboBox4.Name = "comboBox4";
+            this.comboBox4.Size = new System.Drawing.Size(198, 28);
+            this.comboBox4.TabIndex = 38;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 20F);
@@ -777,6 +805,8 @@
         private System.Windows.Forms.Button button10;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.NumericUpDown numericUpDown2;
+        private System.Windows.Forms.ComboBox comboBox4;
+        private System.Windows.Forms.RadioButton radioButton7;
     }
 }
 

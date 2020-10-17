@@ -12,17 +12,21 @@ namespace CraftopiaRNGTool
         public static string dataDirName;
         private  static string dataFolderName = "data";
         private static string treListFolderName = "data_treasure";
+        private static string treDunListFolderName = "data_treasure_dungeon";
         private static string iniName = "CraftopiaRNGTool.ini";
 
         public static string favoListName = "CraftopiaRNGTool_favorite.ini";
         public static string charListName = "list_char_seed.txt";
         private static string mapIdListName = "list_map_id.txt";
+        private static string dungeonListName = "list_dungeon_id.txt";
         private static string searchListName = "CraftopiaRNGTool_search.ini";
 
         private int[][] mapIds;
+        private List<int>[] dungeonIds;
         public static string[] favoList;
         public static string[] charList;
         private TreasureBoxData[][] treBoxList;
+        private TreasureBoxData[][] treDunBoxList;
 
         public static List<string> nonFileNames = new List<string>();
         private static bool isError = false;
@@ -43,7 +47,9 @@ namespace CraftopiaRNGTool
                 TreasureCalc.SetDatas();
                 SetObjects();
                 SetMapIds();
+                SetDungeonIds();
                 SetTreBoxList();
+                SetTreDunBoxList();
                 ShowNonFile();
             }
             catch (Exception ex) { ErrorEvent("初期化に失敗しました", ex); }
@@ -345,7 +351,8 @@ namespace CraftopiaRNGTool
                 comboBox2.SelectedIndex,
                 comboBox3.SelectedIndex,
                 numericUpDown1.Value,
-                numericUpDown2.Value
+                numericUpDown2.Value,
+                comboBox4.SelectedIndex
             };
 
             File.WriteAllText(dirName + iniName, string.Join("\n", strs));
@@ -371,6 +378,7 @@ namespace CraftopiaRNGTool
                 SetcomboBoxSelected(comboBox3, strs[9]);
                 numericUpDown1.Text = strs[10];
                 numericUpDown2.Text = strs[11];
+                if (strs.Length > 12) SetcomboBoxSelected(comboBox4, strs[12]);
             }
 
             ReadSearchText(dirName + searchListName);
@@ -418,6 +426,25 @@ namespace CraftopiaRNGTool
 
             mapIds = vs;
         }
+        private void SetDungeonIds()
+        {
+            string[] texts = TreasureCalc.TryReadFile(dataDirName + dungeonListName);
+            if (texts == null) return;
+            List<int>[] vs = new List<int>[texts.Length];
+
+            for (int i = 0; i < texts.Length; i++)
+            {
+                if (texts[i] == "") continue;
+                string[] strs = texts[i].Split(',');
+                vs[i] = new List<int>();
+                for (int j = 0; j < strs.Length; j++)
+                {
+                    vs[i].Add(TreasureCalc.IntParse(strs[j]));
+                }
+            }
+
+            dungeonIds = vs;
+        }
         
         private void SetObjects()
         {
@@ -437,7 +464,7 @@ namespace CraftopiaRNGTool
             charList = TreasureCalc.TryReadFile(dataDirName + charListName);
             
             radioButtons1 = new RadioButton[] {
-                radioButton0, radioButton1, radioButton2, radioButton3
+                radioButton0, radioButton1, radioButton2, radioButton3, radioButton7
             };
             radioButtons2 = new RadioButton[] {
                 radioButton4, radioButton5, radioButton6
@@ -708,7 +735,6 @@ namespace CraftopiaRNGTool
         }
         private TreasureBoxData[] SetTreBoxList_Sub(string fileName)
         {
-
             string[] strs = TreasureCalc.TryReadFile(fileName);
             if (strs == null) return null;
             TreasureBoxData[] treBoxs = new TreasureBoxData[strs.Length];
@@ -728,10 +754,46 @@ namespace CraftopiaRNGTool
                     continue;
                 }
 
-                treBoxs[i] = new TreasureBoxData(s, name + " " + s[6]);
+                double y;
+                string memo;
+                if (Double.TryParse(s[4], out y) && y < -5000)
+                {
+                    int index = (int)((y + 5000) / -10000);
+                    memo = index + "_" + name;
+                }
+                else
+                {
+                    memo = name;
+                }
+
+                treBoxs[i] = new TreasureBoxData(s, memo);
             }
 
             return treBoxs;
+        }
+
+        private void SetTreDunBoxList()
+        {
+            List<TreasureBoxData[]> datas = new List<TreasureBoxData[]>();
+            string dir = dirName + treDunListFolderName;
+            if (!Directory.Exists(dir))
+            {
+                nonFileNames.Add(dir);
+                return;
+            }
+            string[] files = Directory.GetFiles(dir, "*.txt", SearchOption.AllDirectories);
+            if (files == null) return;
+            string[] fileNames = new string[files.Length];
+
+            for (int i = 0; i < files.Length; i++)
+            {
+                datas.Add(SetTreBoxList_Sub(files[i]));
+                fileNames[i] = Path.GetFileNameWithoutExtension(files[i]);
+            }
+
+            treDunBoxList = datas.ToArray();
+            comboBox4.Items.AddRange(fileNames);
+            comboBox4.SelectedIndex = 0;
         }
         
         private TreasureBoxData[] GetTreList(int value, int rarity)
@@ -739,7 +801,9 @@ namespace CraftopiaRNGTool
             TreasureBoxData[] treBoxs;
             if (value == 0)
             {
-                treBoxs = GetAllTreBox(rarity);
+                List<TreasureBoxData> list = GetAllTreBox(rarity);
+                list.AddRange(GetAllDunTreBox(rarity));
+                treBoxs = list.ToArray();
             }
             else if (value == 1)
             {
@@ -748,6 +812,10 @@ namespace CraftopiaRNGTool
             else if (value == 2)
             {
                 treBoxs = GetIslandTreBox(rarity);
+            }
+            else if (value == 4)
+            {
+                treBoxs = GetDungeonTreBox(rarity);
             }
             else
             {
@@ -784,28 +852,69 @@ namespace CraftopiaRNGTool
             return treBoxs;
         }
 
-        private TreasureBoxData[] GetAllTreBox(int rarity)
+        private List<TreasureBoxData> GetAllTreBox(int rarity)
         {
             List<TreasureBoxData> list = new List<TreasureBoxData>();
+            bool isZero = comboBox1.SelectedIndex == 0;
 
             for (int i = 0; i < treBoxList.Length; i++)
             {
                 for (int j = 0; j < treBoxList[i].Length; j++)
                 {
-                    if (rarity == treBoxList[i][j].Rarity) list.Add(treBoxList[i][j]);
+                    TreasureBoxData treBox = treBoxList[i][j];
+                    if (rarity == treBox.Rarity)
+                    {
+                        if (isZero == (treBox.Id == 8))
+                        {
+                            list.Add(treBox);
+                        }
+                    }
                 }
             }
 
-            return list.ToArray();
+            return list;
+        }
+        private List<TreasureBoxData> GetAllDunTreBox(int rarity)
+        {
+            List<TreasureBoxData> list = new List<TreasureBoxData>();
+            int index = comboBox1.SelectedIndex;
+            bool isZero = index == 0;
+
+            for (int i = 0; i < treDunBoxList.Length; i++)
+            {
+                for (int j = 0; j < treDunBoxList[i].Length; j++)
+                {
+                    TreasureBoxData treBox = treDunBoxList[i][j];
+                    if (rarity == treBox.Rarity)
+                    {
+                        if (isZero)
+                        {
+                            Double.TryParse(treBox.Y, out double y);
+                            if (y < -25000) continue;
+                            if (y > -15000)
+                            {
+                                if (treBox.Id == 9) list.Add(treBox);
+                                continue;
+                            }
+                        }
+
+                        if (dungeonIds[index].IndexOf(treBox.Id) >= 0)
+                        {
+                            list.Add(treBox);
+                        }
+                    }
+                }
+            }
+
+            return list;
         }
 
         private TreasureBoxData[] GetIslandTreBox(int rarity)
         {
-            int index = comboBox3.SelectedIndex;
-            if (comboBox3.SelectedIndex >= 0)
+            int index = comboBox3.SelectedIndex - 1;
+            if (index >= 0)
             {
                 List<TreasureBoxData> list = new List<TreasureBoxData>();
-                TreasureBoxData[] treBoxs = treBoxList[index];
                 foreach (TreasureBoxData treBox in treBoxList[index])
                 {
                     if (rarity == treBox.Rarity) list.Add(treBox);
@@ -814,7 +923,24 @@ namespace CraftopiaRNGTool
             }
             else
             {
-                return new TreasureBoxData[] { new TreasureBoxData(0) };
+                return GetAllTreBox(rarity).ToArray();
+            }
+        }
+        private TreasureBoxData[] GetDungeonTreBox(int rarity)
+        {
+            int index = comboBox4.SelectedIndex - 1;
+            if (index >= 0)
+            {
+                List<TreasureBoxData> list = new List<TreasureBoxData>();
+                foreach (TreasureBoxData treBox in treDunBoxList[index])
+                {
+                    if (rarity == treBox.Rarity) list.Add(treBox);
+                }
+                return list.ToArray();
+            }
+            else
+            {
+                return GetAllDunTreBox(rarity).ToArray();
             }
         }
     }
