@@ -10,6 +10,7 @@ namespace CraftopiaRNGTool
         {
             InitializeComponent();
             FormClosed += Form_FormClosed;
+            dataGridView1.CellFormatting += CellFormatting;
             SetData(treDatas, mode);
         }
 
@@ -66,7 +67,7 @@ namespace CraftopiaRNGTool
                     HeaderText = "アイテム" + i,
                     Width = itemWidth
                 };
-                textColumn.DefaultCellStyle.BackColor = Color.LavenderBlush;
+                //textColumn.DefaultCellStyle.BackColor = Color.LavenderBlush;
                 columns[count] = textColumn;
                 count++;
                 viewWidth += itemWidth;
@@ -87,6 +88,21 @@ namespace CraftopiaRNGTool
             Width = viewWidth + 34;
             dataGridView1.Columns.AddRange(columns);
             dataGridView1.DataSource = treDatas;
+        }
+
+        private void CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+            if (e.ColumnIndex > 11 && "" + e.Value != "")
+            {
+                if (e.ColumnIndex % 4 == 0)
+                {
+                    e.CellStyle.BackColor = Color.LavenderBlush;
+                }
+                else
+                {
+                    e.CellStyle.BackColor = Color.GhostWhite;
+                }
+            }
         }
     }
 }

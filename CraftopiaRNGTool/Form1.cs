@@ -486,6 +486,7 @@ namespace CraftopiaRNGTool
             int[] jValue = mapIds[islandLevel];
             int maxCount = (int)numericUpDown2.Value;
             int count = 0;
+            bool isZero = islandLevel == 0;
 
             if (checkBox1.Checked && checkBox2.Checked)
             {
@@ -519,7 +520,9 @@ namespace CraftopiaRNGTool
                     for (int k = 0; k < treBoxs.Length; k++)
                     {
                         int seed = i + jValue[j];
-                        ItemData[] items = TreasureCalc.GetTreasureItem(islandLevel, seed + treBoxs[k].PosHash, treType);
+                        TreasureBoxData treBox = treBoxs[k];
+                        ItemData[] items = TreasureCalc.GetTreasureItem(islandLevel, seed + treBox.PosHash, treType);
+
                         if (Search_IsHit(items, searchValue, isAnd))
                         {
                             int wSeed, iId;
@@ -533,8 +536,17 @@ namespace CraftopiaRNGTool
                                 wSeed = i;
                                 iId = jValue[j];
                             }
-                            TreasureData treData = new TreasureData(islandLevel, seed, wSeed, iId, treType, treBoxs[k], items, radioValue1);
+
+                            if (treBox.IsDungeon && treBox.Id != 9)
+                            {
+                                TreasureBoxData tre = GetIsDungeonMemo(treBox, seed, isZero);
+                                if (tre == null) continue;
+                                treBox = tre;
+                            }
+
+                            TreasureData treData = new TreasureData(islandLevel, seed, wSeed, iId, treType, treBox, items, radioValue1);
                             treDatas.Add(treData);
+
                             count++;
                             if (count >= maxCount)
                             {
@@ -647,6 +659,38 @@ namespace CraftopiaRNGTool
             return false;
         }
 
+        private TreasureBoxData GetIsDungeonMemo(TreasureBoxData treBox, int seed, bool isZero)
+        {
+            string memo = "";
+            if (isZero)
+            {
+                UnityEngine.Random.InitState(seed);
+                int rand = UnityEngine.Random.Range(0, 2);
+                if (rand == treBox.Index)
+                {
+                    return null;
+                }
+            }
+            else
+            {
+                for (int m = 3; m <= 5; m++)
+                {
+                    UnityEngine.Random.InitState(seed);
+                    int rand = UnityEngine.Random.Range(0, m);
+                    if (rand != treBox.Index && m > treBox.Index)
+                    {
+                        memo += "" + m;
+                    }
+                }
+
+                if (memo == "") return null;
+                if (memo == "345") memo = "All";
+                memo += "-";
+            }
+
+            return new TreasureBoxData(treBox, treBox.Index + "-" + memo + treBox.Memo);
+        }
+
         private int GetItemId(string name)
         {
             foreach (ItemData[] items in TreasureCalc.data_Item)
@@ -755,18 +799,15 @@ namespace CraftopiaRNGTool
                 }
 
                 double y;
-                string memo;
                 if (Double.TryParse(s[4], out y) && y < -5000)
                 {
                     int index = (int)((y + 5000) / -10000);
-                    memo = index + "_" + name;
+                    treBoxs[i] = new TreasureBoxData(s, name, index);
                 }
                 else
                 {
-                    memo = name;
+                    treBoxs[i] = new TreasureBoxData(s, name);
                 }
-
-                treBoxs[i] = new TreasureBoxData(s, memo);
             }
 
             return treBoxs;
@@ -891,11 +932,6 @@ namespace CraftopiaRNGTool
                         {
                             Double.TryParse(treBox.Y, out double y);
                             if (y < -25000) continue;
-                            if (y > -15000)
-                            {
-                                if (treBox.Id == 9) list.Add(treBox);
-                                continue;
-                            }
                         }
 
                         if (dungeonIds[index].IndexOf(treBox.Id) >= 0)
