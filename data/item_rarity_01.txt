@@ -11,9 +11,9 @@
 752,砂,Material,Common,0,10
 758,羊毛,Material,Common,0,10
 763,硫黄,Material,Common,0,10
-772,壁-垂直,Building,Common,0,10
-773,壁-水平,Building,Common,0,10
-774,壁-斜め,Building,Common,0,10
+772,木の壁,Building,Common,0,10
+773,木の床,Building,Common,0,10
+774,木の斜め床,Building,Common,0,10
 787,両手たいまつ,Equipment,Common,0,20
 811,水,Consumption,Common,0,10
 1301,目玉焼き,Consumption,Common,0,15
