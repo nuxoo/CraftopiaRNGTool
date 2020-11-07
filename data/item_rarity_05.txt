@@ -11,6 +11,7 @@
 1372,餅,Consumption,Common,0,3
 1380,おにぎり,Consumption,Common,0,3
 1382,太極スープ,Consumption,Common,0,3
+1785,馬のマスク【テスト中】,Equipment,Uncommon,1,1
 1821,ブロードソードI,Equipment,Common,0,100
 1823,レイピアI,Equipment,Common,0,100
 1824,ダークI,Equipment,Common,0,100

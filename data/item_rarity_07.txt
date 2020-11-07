@@ -17,6 +17,7 @@
 1377,カボチャシチュー,Consumption,Common,0,2
 1390,せんべい,Consumption,Common,0,2
 1393,板チョコレート,Consumption,Common,0,2
+1788,ジャック・オ・ランタンマスク【テスト中】,Equipment,Uncommon,1,1
 2152,品種改良タネ袋Lv7,Consumption,Common,0,2
 2202,アオウミガメ,Consumption,Uncommon,1,2
 2204,サメ,Consumption,Uncommon,1,2

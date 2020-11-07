@@ -6,3 +6,6 @@
 170,真紅の,Legendary,0,0,1 
 171,むらっけのある,Legendary,0,0,1 
 185,名君の,Legendary,0,0,1 
+210,むらのある,Legendary,0,0,1 
+219,365日働く,Legendary,0,0,1 
+220,大食いの,Legendary,0,0,1 

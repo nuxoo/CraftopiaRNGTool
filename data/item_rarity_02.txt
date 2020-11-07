@@ -15,4 +15,5 @@
 1308,キノコソテー,Consumption,Common,0,8
 1395,ビシソワーズ,Consumption,Common,0,8
 1396,ハーブソーセージ,Consumption,Common,0,8
+1738,野球バット【テスト中】,Equipment,Common,0,20
 2147,品種改良タネ袋Lv2,Consumption,Common,0,2

@@ -4,7 +4,7 @@
 10,ウシの,Uncommon,1,0,1
 13,素朴な,Uncommon,1,0,1
 18,鋭い,Uncommon,1,0,1
-35,磨かれた,Uncommon,1,0,1
+35,研がれた,Uncommon,1,0,1
 44,守護の,Uncommon,1,0,1
 89,バッファローの,Uncommon,1,0,1
 92,イノシシの,Uncommon,1,0,1
@@ -28,4 +28,7 @@
 117,小妖精の,Uncommon,1,0,1
 142,ウェアウルフの,Uncommon,1,0,1
 181,キングモノの,Uncommon,1,0,1
+196,久しい,Uncommon,1,0,1
 200,昔の,Uncommon,1,0,1
+212,働き者の,Uncommon,1,0,1
+216,8時間働く,Uncommon,1,0,1

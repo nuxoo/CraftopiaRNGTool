@@ -12,6 +12,11 @@
 1374,太巻き,Consumption,Rare,2,2
 1378,オレンジケーキ,Consumption,Epic,3,2
 1394,揚げ魚の甘酢あんかけ,Consumption,Epic,3,2
+1729,ホームランバット【テスト中】,Equipment,Epic,3,1
+1784,野球ヘルメット【テスト中】,Equipment,Rare,2,1
+1786,イノシシの被り物【テスト中】,Equipment,Epic,3,1
+1787,狐のお面【テスト中】,Equipment,Epic,3,1
+1789,試練の狐面【テスト中】,Equipment,Epic,3,1
 2153,品種改良タネ袋Lv8,Consumption,Common,0,2
 2201,ジンベイザメ,Consumption,Epic,3,1
 2206,ピライーバ,Consumption,Rare,2,1

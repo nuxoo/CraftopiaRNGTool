@@ -33,6 +33,7 @@
 1731,ブラックブレード,Equipment,Common,0,100
 1734,蛮族の石刀,Equipment,Common,0,100
 1735,勇者の剣,Equipment,Uncommon,1,100
+1737,村人バット【テスト中】,Equipment,Rare,2,1
 1806,マインゴーシュI,Equipment,Common,0,100
 1819,カタールI,Equipment,Common,0,100
 1915,コンテナ,Building,Common,0,10
