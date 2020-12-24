@@ -22,3 +22,4 @@
 1391,こんにゃく,Consumption,Common,0,15
 1801,木の棒I,Equipment,Common,0,100
 2146,品種改良タネ袋Lv1,Consumption,Common,0,2
+3400,ぼろ布【テスト中】,Material,Common,0,20

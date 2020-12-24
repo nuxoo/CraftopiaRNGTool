@@ -4,6 +4,7 @@
 1383,トムヤムクン,Consumption,Epic,3,1
 1385,ハワイアンステーキ,Consumption,Epic,3,1
 1392,タコス,Consumption,Epic,3,1
+1715,炎剣スルト【テスト中】,Equipment,Legendary,4,3
 2158,品種改良タネ袋Lv13,Consumption,Common,0,2
 3144,ケペシュIII,Equipment,Common,0,5
 3147,感謝の聖剣III,Equipment,Common,0,5

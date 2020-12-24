@@ -22,4 +22,8 @@
 1808,ククリI,Equipment,Common,0,100
 1818,グラディウスI,Equipment,Common,0,100
 1820,マチェーテI,Equipment,Common,0,100
+2076,毒きのこ,Consumption,Common,0,10
+2078,棘【テスト中】,Material,Common,0,10
 2148,品種改良タネ袋Lv3,Consumption,Common,0,2
+3239,木の戦闘ツール【テスト中】,Equipment,Common,0,10
+3240,灰の戦闘ツール【テスト中】,Equipment,Common,0,10

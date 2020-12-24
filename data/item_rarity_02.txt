@@ -17,3 +17,5 @@
 1396,ハーブソーセージ,Consumption,Common,0,8
 1738,野球バット【テスト中】,Equipment,Common,0,20
 2147,品種改良タネ袋Lv2,Consumption,Common,0,2
+3203,洗濯機【テスト中】,Building,Common,0,10
+3351,殻【テスト中】,Material,Common,0,10

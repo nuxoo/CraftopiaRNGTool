@@ -16,3 +16,4 @@
 3107,感謝の聖剣II,Equipment,Common,0,10
 3111,ガネーシャの宝剣II,Equipment,Common,0,10
 3116,無心流鎖鎌II,Equipment,Common,0,10
+3182,猛毒の矢【テスト中】,Equipment,Common,0,8

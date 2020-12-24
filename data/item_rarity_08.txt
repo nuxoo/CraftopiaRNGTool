@@ -3,6 +3,8 @@
 75,プラチナの斧,Equipment,Rare,2,10
 99,プラチナの弓,Equipment,Rare,2,10
 123,プラチナの盾【テスト中】,Equipment,Rare,2,10
+599,サンドバッグ【テスト中】,Consumption,Common,0,20
+602,訓練カカシ【テスト中】,Consumption,Common,0,20
 705,プラチナ,Material,Rare,2,10
 717,プラチナのインゴット,Material,Rare,2,5
 1346,春巻き,Consumption,Common,0,2
@@ -17,6 +19,7 @@
 1786,イノシシの被り物【テスト中】,Equipment,Epic,3,1
 1787,狐のお面【テスト中】,Equipment,Epic,3,1
 1789,試練の狐面【テスト中】,Equipment,Epic,3,1
+1852,サジタリウスの弓【テスト中】,Equipment,Epic,3,20
 2153,品種改良タネ袋Lv8,Consumption,Common,0,2
 2201,ジンベイザメ,Consumption,Epic,3,1
 2206,ピライーバ,Consumption,Rare,2,1
@@ -29,3 +32,4 @@
 3113,フランキスカII,Equipment,Common,0,5
 3115,暗黒騎士の剣II,Equipment,Common,0,5
 3117,キコリの剣II,Equipment,Common,0,5
+3181,毒の矢【テスト中】,Equipment,Common,0,15

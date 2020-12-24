@@ -13,3 +13,5 @@
 1369,味噌汁,Consumption,Common,0,4
 1822,マムルークソードI,Equipment,Common,0,100
 2149,品種改良タネ袋Lv4,Consumption,Common,0,2
+3241,鉄の砥石【テスト中】,Equipment,Rare,2,10
+3242,鉄の護符【テスト中】,Equipment,Rare,2,10

@@ -11,10 +11,13 @@
 1372,餅,Consumption,Common,0,3
 1380,おにぎり,Consumption,Common,0,3
 1382,太極スープ,Consumption,Common,0,3
+1711,ドラゴン殺し【テスト中】,Equipment,Uncommon,1,10
 1785,馬のマスク【テスト中】,Equipment,Uncommon,1,1
 1821,ブロードソードI,Equipment,Common,0,100
 1823,レイピアI,Equipment,Common,0,100
 1824,ダークI,Equipment,Common,0,100
+2095,解毒薬【テスト中】,Consumption,Common,0,10
+2096,毒薬【テスト中】,Consumption,Common,0,10
 2150,品種改良タネ袋Lv5,Consumption,Common,0,2
 2203,スズキ,Consumption,Common,0,10
 2207,ニジマス,Consumption,Common,0,10
@@ -31,3 +34,4 @@
 2225,ブリ,Consumption,Common,0,10
 2226,ロウニンアジ,Consumption,Common,0,10
 2227,カマスサワラ,Consumption,Common,0,10
+3200,修理ハンマー【テスト中】,Equipment,Common,0,1
