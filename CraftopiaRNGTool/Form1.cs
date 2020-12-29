@@ -27,6 +27,8 @@ namespace CraftopiaRNGTool
         public static string[] charList;
         private TreasureBoxData[][] treBoxList;
         private TreasureBoxData[][] treDunBoxList;
+        private string[][] iniDatas = new string[2][];
+        private string[][] iniSearchDatas = new string[2][];
 
         public static List<string> nonFileNames = new List<string>();
         private static bool isError = false;
@@ -81,12 +83,25 @@ namespace CraftopiaRNGTool
         {
             Program.isLoading = false;
         }
-        
+
+        private void TabControl1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
         private void Search_Click(object sender, EventArgs e)
         {
             try
             {
-                Search();
+                //DebugRandTest();
+                if (tabControl1.SelectedIndex == 1)
+                {
+                    Search2();
+                }
+                else
+                {
+                    Search();
+                }
             }
             catch (Exception ex) { ErrorEvent("検索に失敗しました", ex); }
         }
@@ -309,8 +324,21 @@ namespace CraftopiaRNGTool
         public static object[] GetItemList(bool mode)
         {
             List<ItemData> list = new List<ItemData>();
-            int index = Program.form1.comboBox1.SelectedIndex;
-            int index2 = Program.form1.comboBox2.SelectedIndex;
+            int index, index2;
+            if (Program.form1.tabControl1.SelectedIndex == 1)
+            {
+                index = Program.form1.comboBox5.SelectedIndex;
+                if (index < TreasureCalc.max_IslandLevel)
+                {
+                    index++;
+                }
+                index2 = 0;
+            }
+            else
+            {
+                index = Program.form1.comboBox1.SelectedIndex;
+                index2 = Program.form1.comboBox2.SelectedIndex;
+            }
             int[] vs = TreasureCalc.rarityArray_Item[index][index2];
             for (int i = 0; i < TreasureCalc.data_Item.Length; i++)
             {
@@ -338,7 +366,7 @@ namespace CraftopiaRNGTool
 
         private void WriteIni()
         {
-            object[] strs = new object[]
+            object[] objs = new object[]
             {
                 checkBox1.Checked,
                 checkBox2.Checked,
@@ -352,11 +380,18 @@ namespace CraftopiaRNGTool
                 comboBox3.SelectedIndex,
                 numericUpDown1.Value,
                 numericUpDown2.Value,
-                comboBox4.SelectedIndex
+                comboBox4.SelectedIndex,
+                comboBox5.SelectedIndex,
+                checkBox4.Checked,
+                numericUpDown3.Value,
+                numericUpDown4.Value,
+                tabControl1.SelectedIndex
             };
 
-            File.WriteAllText(dirName + iniName, string.Join("\n", strs));
-            WriteSearchText(dirName + searchListName);
+            File.WriteAllText(dirName + iniName, String.Join("\n", objs));
+
+            string[] strs = GetSearchText();
+            File.WriteAllLines(dirName + searchListName, strs);
         }
         private void ReadIni()
         {
@@ -364,7 +399,7 @@ namespace CraftopiaRNGTool
             if (File.Exists(fileName))
             {
                 string[] strs = File.ReadAllLines(fileName, Encoding.UTF8);
-                if (strs.Length < 12) return;
+                if (strs.Length < 17) return;
 
                 checkBox1.Checked = strs[0] == "True";
                 checkBox2.Checked = strs[1] == "True";
@@ -378,13 +413,22 @@ namespace CraftopiaRNGTool
                 SetcomboBoxSelected(comboBox3, strs[9]);
                 numericUpDown1.Text = strs[10];
                 numericUpDown2.Text = strs[11];
-                if (strs.Length > 12) SetcomboBoxSelected(comboBox4, strs[12]);
-            }
+                SetcomboBoxSelected(comboBox4, strs[12]);
+                SetcomboBoxSelected(comboBox5, strs[13]);
+                checkBox4.Checked = strs[14] == "True";
+                numericUpDown3.Text = strs[15];
+                numericUpDown4.Text = strs[16];
+                tabControl1.SelectedIndex = strs[17] == "1" ? 1 : 0;
+                
+                fileName = dirName + searchListName;
+                if (!File.Exists(fileName)) return;
 
-            ReadSearchText(dirName + searchListName);
+                string[] texts = TreasureCalc.TryReadFile(fileName);
+                SetSearchText(texts);
+            }
         }
         
-        private void WriteSearchText(string fileName)
+        private string[] GetSearchText()
         {
             List<string> strs = new List<string>();
             for (int i = 0; i < listBox1.Items.Count; i++)
@@ -392,13 +436,10 @@ namespace CraftopiaRNGTool
                 strs.Add(listBox1.Items[i].ToString());
             }
 
-            File.WriteAllLines(fileName, strs);
+            return strs.ToArray();
         }
-        private void ReadSearchText(string fileName)
+        private void SetSearchText(string[] strs)
         {
-            if (!File.Exists(fileName)) return;
-
-            string[] strs = TreasureCalc.TryReadFile(fileName);
             object[] objs = new object[strs.Length];
             for (int i = 0; i < strs.Length; i++)
             {
@@ -455,9 +496,11 @@ namespace CraftopiaRNGTool
             for (int i = 0; i < TreasureCalc.max_IslandLevel + 1; i++)
             {
                 comboBox1.Items.Add(i);
+                comboBox5.Items.Add(i);
             }
             comboBox1.SelectedIndex = 0;
             comboBox2.SelectedIndex = 0;
+            comboBox5.SelectedIndex = 0;
 
             favoList = TreasureCalc.TryReadFile(dirName + favoListName);
             UI_SetFavoList();
@@ -560,6 +603,86 @@ namespace CraftopiaRNGTool
             }
 
             Form_Result form = new Form_Result(treDatas, radioValue1);
+            form.Show();
+        }
+
+        private void Search2()
+        {
+            List<TreasureData2> mDatas = new List<TreasureData2>();
+            int itemCount = 10;
+            int islandLevel = comboBox5.SelectedIndex;
+            int radioValue = GetRadioButtonChecked(radioButtons2);
+            int[][] searchValue = GetSearchValue(radioValue);
+            int iValue = 0, iLength;
+            int[] jValue = mapIds[islandLevel];
+            int syouhi = (int)numericUpDown3.Value;
+            int sMaxCount = (int)numericUpDown4.Value;
+            int maxCount = (int)numericUpDown2.Value;
+            int count = 0;
+            bool isAnd = radioValue == 1;
+            if (islandLevel < TreasureCalc.max_IslandLevel)
+            {
+                islandLevel++;
+            }
+
+            if (checkBox1.Checked && checkBox2.Checked)
+            {
+                int min = jValue[0];
+                int max = jValue[jValue.Length - 1];
+                iLength = max - min + 255;
+                jValue = new int[] { min };
+            }
+            else
+            {
+                if (checkBox1.Checked)
+                {
+                    iLength = 255;
+                }
+                else
+                {
+                    iValue = (int)worldSeedNum.Value;
+                    iLength = iValue + 1;
+                }
+                if (!checkBox2.Checked)
+                {
+                    jValue = new int[] { (int)mapIdNum3.Value };
+                }
+            }
+
+            for (int j = 0; j < jValue.Length; j++)
+            {
+                for (int i = iValue; i < iLength; i++)
+                {
+                    ItemData[] items;
+                    int seed = i + jValue[j];
+                    int randCount = syouhi;
+
+                    UnityEngine.Random.InitState(seed);
+                    TreasureCalc.RandSyouhi(syouhi);
+
+                    for (int k = 0; k < sMaxCount; k++)
+                    {
+                        items = TreasureCalc.GetMerchantItem(islandLevel, itemCount);
+
+                        if (Search_IsHit(items, searchValue, isAnd))
+                        {
+                            for (int m = 0; m < itemCount; m++)
+                            {
+                                mDatas.Add(new TreasureData2(islandLevel, seed, i, jValue[j], k + 1, 0, items[m]));
+                            }
+                            count += itemCount;
+                            if (count >= maxCount)
+                            {
+                                i = iLength;
+                                j = jValue.Length;
+                                break;
+                            }
+                        }
+                    }
+                }
+            }
+
+            Form_Result2 form = new Form_Result2(mDatas, radioValue);
             form.Show();
         }
 
@@ -797,9 +920,8 @@ namespace CraftopiaRNGTool
                     treBoxs[i] = new TreasureBoxData();
                     continue;
                 }
-
-                double y;
-                if (Double.TryParse(s[4], out y) && y < -5000)
+                
+                if (Double.TryParse(s[4], out double y) && y < -5000)
                 {
                     int index = (int)((y + 5000) / -10000);
                     treBoxs[i] = new TreasureBoxData(s, name, index);
@@ -978,6 +1100,28 @@ namespace CraftopiaRNGTool
             {
                 return GetAllDunTreBox(rarity).ToArray();
             }
+        }
+
+        private void DebugRandTest()
+        {
+            int check = 56800;
+            string str = "";
+            UnityEngine.Random.InitState((int)worldSeedNum.Value + (int)mapIdNum3.Value);
+            for (int i = 0; i < 1000; i++)
+            {
+                int rand = UnityEngine.Random.Range(0, 65536);
+                if (check == rand)
+                {
+                    str += "消費：" + i + "\n";
+                    for (int j = 0; j < 6; j++)
+                    {
+                        str += rand + " ";
+                        rand = UnityEngine.Random.Range(0, 65536);
+                    }
+                    break;
+                }
+            }
+            MessageBox.Show(str);
         }
     }
 }

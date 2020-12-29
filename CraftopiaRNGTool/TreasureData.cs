@@ -14,7 +14,6 @@
         public string X { get; set; }
         public string Z { get; set; }
         public string Y { get; set; }
-        public ItemData[] Items { get; set; }
 
         public string Item1 { get; set; }
         public string Item2 { get; set; }
@@ -32,6 +31,8 @@
         public string Enchant4_1 { get; set; }
         public string Enchant4_2 { get; set; }
         public string Enchant4_3 { get; set; }
+
+        private ItemData[] Items;
 
         public TreasureData()
         {

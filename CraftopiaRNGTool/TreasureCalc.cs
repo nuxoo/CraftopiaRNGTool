@@ -227,6 +227,35 @@ namespace CraftopiaRNGTool
             return new EnchantData();
         }
 
+        private static ItemData GetItemData(int islandLevel, int rarity)
+        {
+            int itemRarity = GetRarity(islandLevel, rarity, rarityCash_Item, rarityArray_Item);
+            ItemData item = GetItem(itemRarity);
+            //ItemType.Equipment : ItemType.Material : ItemType.Consumption
+            if (item.Type == "Equipment" || item.Type == "Material" || item.Type == "Consumption")
+            {
+                int enchantCount = 1;
+                float value = UnityEngine.Random.value;
+                if (value < 0.05f)
+                {
+                    enchantCount = 3;
+                }
+                else if (value < 0.2f)
+                {
+                    enchantCount = 2;
+                }
+                item.Enchant = new EnchantData[enchantCount];
+                for (int j = 0; j < enchantCount; j++)
+                {
+                    int enchantRarity = GetRarity(islandLevel, rarity, rarityCash_Enchant, rarityArray_Enchant);
+                    EnchantData enchant = GetEnchant(enchantRarity);
+                    item.Enchant[j] = enchant;
+                }
+            }
+
+            return item;
+        }
+
         public static ItemData[] GetTreasureItem(int islandLevel, int seed, int rarity)
         {
             UnityEngine.Random.InitState(seed);
@@ -248,38 +277,34 @@ namespace CraftopiaRNGTool
 
             for (int i = 0; i < itemCount; i++)
             {
-                int itemRarity = GetRarity(islandLevel, rarity, rarityCash_Item, rarityArray_Item);
-                treasureItem[i] = GetItem(itemRarity);
-                //ItemType.Equipment : ItemType.Material : ItemType.Consumption
-                if (treasureItem[i].Type == "Equipment" || treasureItem[i].Type == "Material" || treasureItem[i].Type == "Consumption")
-                {
-                    int enchantCount = 1;
-                    float value = UnityEngine.Random.value;
-                    if (value < 0.05f)
-                    {
-                        enchantCount = 3;
-                    }
-                    else if (value < 0.2f)
-                    {
-                        enchantCount = 2;
-                    }
-                    treasureItem[i].Enchant = new EnchantData[enchantCount];
-                    for (int j = 0; j < enchantCount; j++)
-                    {
-                        int enchantRarity = GetRarity(islandLevel, rarity, rarityCash_Enchant, rarityArray_Enchant);
-                        EnchantData enchant = GetEnchant(enchantRarity);
-                        treasureItem[i].Enchant[j] = enchant;
-                    }
-                }
+                treasureItem[i] = GetItemData(islandLevel, rarity);
 
                 //乱数消費
-                for (int k = 0; k < 5; k++)
-                {
-                    UnityEngine.Random.Range(0f, 1f);
-                }
+                RandSyouhi(5);
             }
 
             return treasureItem;
+        }
+
+        public static ItemData[] GetMerchantItem(int islandLevel, int count)
+        {
+            ItemData[] itemDatas = new ItemData[count];
+            for (int i = 0; i < count; i++)
+            {
+                itemDatas[i] = GetItemData(islandLevel, 0);
+            }
+
+            RandSyouhi(1);
+
+            return itemDatas;
+        }
+
+        public static void RandSyouhi(int value)
+        {
+            for (int i = 0; i < value; i++)
+            {
+                UnityEngine.Random.Range(0, 1);
+            }
         }
         
         public static int IntParse(string str)

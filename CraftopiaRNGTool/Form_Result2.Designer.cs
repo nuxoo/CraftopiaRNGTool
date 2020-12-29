@@ -1,6 +1,6 @@
 ﻿namespace CraftopiaRNGTool
 {
-    partial class Form_Result
+    partial class Form_Result2
     {
         /// <summary>
         /// Required designer variable.
@@ -42,16 +42,16 @@
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowHeadersVisible = false;
             this.dataGridView1.RowTemplate.Height = 24;
-            this.dataGridView1.Size = new System.Drawing.Size(1646, 339);
-            this.dataGridView1.TabIndex = 0;
+            this.dataGridView1.Size = new System.Drawing.Size(800, 339);
+            this.dataGridView1.TabIndex = 1;
             // 
-            // Form_Result
+            // Form_Result2
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1646, 339);
+            this.ClientSize = new System.Drawing.Size(800, 339);
             this.Controls.Add(this.dataGridView1);
-            this.Name = "Form_Result";
+            this.Name = "Form_Result2";
             this.Text = "検索結果";
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
