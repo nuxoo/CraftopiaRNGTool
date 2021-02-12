@@ -9,3 +9,4 @@
 210,むらのある,Legendary,0,0,1 
 219,365日働く,Legendary,0,0,1 
 220,大食いの,Legendary,0,0,1 
+311,不安定な,Legendary,0,0,1 

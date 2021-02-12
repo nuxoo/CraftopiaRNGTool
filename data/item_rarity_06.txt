@@ -8,6 +8,7 @@
 476,掘削機,Building,Common,0,5
 536,プリズムガチャ,Building,Common,0,5
 596,爆破タル,Consumption,Common,0,20
+603,爆竹【テスト中】,Consumption,Common,0,20
 680,牙,Material,Common,0,100
 703,チタン鉱石,Material,Common,0,20
 715,チタンのインゴット,Material,Common,0,20
@@ -38,6 +39,7 @@
 1737,村人バット【テスト中】,Equipment,Rare,2,1
 1806,マインゴーシュI,Equipment,Common,0,100
 1819,カタールI,Equipment,Common,0,100
+1910,シュヴァルツランツェンレイター【テスト中】,Equipment,Rare,2,100
 1915,コンテナ,Building,Common,0,10
 2077,猛毒きのこ【テスト中】,Consumption,Common,0,10
 2079,毒の棘【テスト中】,Material,Common,0,10

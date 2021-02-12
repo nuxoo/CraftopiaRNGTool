@@ -20,6 +20,7 @@
 1787,狐のお面【テスト中】,Equipment,Epic,3,1
 1789,試練の狐面【テスト中】,Equipment,Epic,3,1
 1852,サジタリウスの弓【テスト中】,Equipment,Epic,3,20
+1901,青龍偃月刀【テスト中】,Equipment,Epic,3,50
 2153,品種改良タネ袋Lv8,Consumption,Common,0,2
 2201,ジンベイザメ,Consumption,Epic,3,1
 2206,ピライーバ,Consumption,Rare,2,1

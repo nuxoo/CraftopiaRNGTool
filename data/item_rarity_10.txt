@@ -8,6 +8,7 @@
 1367,生ガキ,Consumption,Common,0,2
 1386,ムニエル,Consumption,Common,0,2
 1389,天ぷら,Consumption,Common,0,2
+1909,屠殺者【テスト中】,Equipment,Epic,3,20
 2155,品種改良タネ袋Lv10,Consumption,Common,0,2
 3142,カットラスIII,Equipment,Common,0,20
 3146,マインゴーシュIII,Equipment,Common,0,20

@@ -17,3 +17,4 @@
 3153,フランキスカIII,Equipment,Common,0,10
 3155,暗黒騎士の剣III,Equipment,Common,0,10
 3157,キコリの剣III,Equipment,Common,0,10
+3373,掘り出し物の機械部品【テスト中】,Material,Legendary,4,10

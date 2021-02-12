@@ -1,4 +1,5 @@
 64,ダイヤのつるはし,Equipment,Common,0,10
+647,ダッシュ板【テスト中】,Building,Common,0,3
 706,ダイヤ,Material,Common,0,5
 718,ダイヤのインゴット,Material,Common,0,5
 1328,ミネストローネ,Consumption,Common,0,2

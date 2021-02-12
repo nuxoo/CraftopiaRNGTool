@@ -2,7 +2,7 @@
 56,石のつるはし,Equipment,Common,0,10
 68,木の斧,Equipment,Common,0,10
 92,枝の弓,Equipment,Common,0,10
-140,石のグライダー,Equipment,Common,0,10
+140,グライダー,Equipment,Common,0,10
 695,骨,Material,Common,0,100
 698,石,Material,Common,0,20
 722,赤のハーブ,Consumption,Common,0,100

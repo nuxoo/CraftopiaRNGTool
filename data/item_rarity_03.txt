@@ -27,3 +27,4 @@
 2148,品種改良タネ袋Lv3,Consumption,Common,0,2
 3239,木の戦闘ツール【テスト中】,Equipment,Common,0,10
 3240,灰の戦闘ツール【テスト中】,Equipment,Common,0,10
+3401,コットンキャンバス【テスト中】,Material,Common,0,10
